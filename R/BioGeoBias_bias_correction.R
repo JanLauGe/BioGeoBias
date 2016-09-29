@@ -125,8 +125,6 @@ bias_correction <- function(
         lonFilter,
         paste(lonMin,lonMax,sep=','),
         paste('-180','180',sep=',')),
-      yearMin = yearMin,
-      yearMax = yearMax,
       hasCoordinate = TRUE,
       hasGeospatialIssue = FALSE)
 

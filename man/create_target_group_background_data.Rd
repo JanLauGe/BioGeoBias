@@ -2,7 +2,7 @@
 % Please edit documentation in R/BioGeoBias_create_target_group_background_data.R
 \name{create_target_group_background_data}
 \alias{create_target_group_background_data}
-\title{Get background data using the Target Group Background Approach (TGBA)}
+\title{Create Target Group Background data}
 \usage{
 create_target_group_background_data(species_name,
   target_rank = rgbif::taxrank(), kingdom = c(NULL, "animalia", "plantae",

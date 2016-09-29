@@ -4,10 +4,11 @@
 \alias{call_map_api}
 \title{Call map API for bias grid}
 \usage{
-call_map_api(taxonkey = 1, decades = c("1990_2000", "2000_2010",
-  "2010_2020"), layers = c("OBS", "SP", "OTH"), living = TRUE,
-  fossil = FALSE, breaks = NULL, nbreaks = NULL, x = 0, y = 0,
-  z = 0)
+call_map_api(taxonkey = 1, decades = c("NO_YEAR", "PRE_1900", "1900_1910",
+  "1910_1920", "1920_1930", "1930_1940", "1940_1950", "1950_1960", "1960_1970",
+  "1970_1980", "1980_1990", "1990_2000", "2000_2010", "2010_2020"),
+  layers = c("OBS", "SP", "OTH"), living = TRUE, fossil = FALSE,
+  breaks = NULL, nbreaks = NULL, x = 0, y = 0, z = 0)
 }
 \arguments{
 \item{taxonkey}{a valid GBIF taxon key as returned by ###}

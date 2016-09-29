@@ -2,12 +2,12 @@
 % Please edit documentation in R/BioGeoBias_bias_correction.R
 \name{bias_correction}
 \alias{bias_correction}
-\title{Choose bias correction approach and generate bias correction data}
+\title{Bias Correction}
 \usage{
 bias_correction(species_name, target_rank = rgbif::taxrank(),
   kingdom = c(NULL, "animalia", "plantae", "archaea", "bacteria", "fungi",
   "protozoa", "viruses"), lonMin = NULL, lonMax = NULL, latMin = NULL,
-  latMax = NULL, breaks = NULL, nbreaks = NULL)
+  latMax = NULL, breaks = NULL, nbreaks = NULL, limit = 2e+05)
 }
 \arguments{
 \item{species_name}{(character) a valid taxon name, presumably a species name.}
@@ -31,23 +31,17 @@ search for species occurrences of the target group (optional).}
 search for species occurrences of the target group (optional).}
 }
 \description{
+Choose bias correction approach and generate bias correction data
+}
+\details{
 This function takes a species name and a rank, and returns a
 dataset suitable for bias correction by invoking
 \code{create_target_group_background_data} or
 \code{create_bias_grid}, depending on the number of species occurrence
 records available for the species and the spatial extent of the selection.
 }
-\details{
-hello
-}
 \author{
 Jan Laurens Geffert, \email{laurensgeffert@gmail.com}
-}
-\references{
-\url{http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors}
-}
-\seealso{
-\url{http://www.ecography.org/accepted-article/performance-tradeoffs-target-group-bias-correction-species-distribution-models}
 }
 \keyword{GBIF,}
 \keyword{SDM}
