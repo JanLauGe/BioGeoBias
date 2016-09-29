@@ -1,10 +1,6 @@
 
-#' @title Choose bias correction approach and generate bias correction data
-#' @description This function takes a species name and a rank, and returns a
-#' dataset suitable for bias correction by invoking
-#' \code{create_target_group_background_data} or
-#' \code{create_bias_grid}, depending on the number of species occurrence
-#' records available for the species and the spatial extent of the selection.
+#' @title Bias Correction
+#' @description Choose bias correction approach and generate bias correction data
 #' @param species_name (character) a valid taxon name, presumably a species name.
 #' @param target_rank (character) a taxon rank for the target group (optional).
 #' @param kingdom (character) the kingdom of the species. Can be supplied to
@@ -19,9 +15,11 @@
 #' @param latMax maximum latitude of a rectancular bounding box restricting the
 #' search for species occurrences of the target group (optional).
 #' @author Jan Laurens Geffert, \email{laurensgeffert@@gmail.com}
-#' @details hello
-#' @references \url{http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors}
-#' @seealso \url{http://www.ecography.org/accepted-article/performance-tradeoffs-target-group-bias-correction-species-distribution-models}
+#' @details This function takes a species name and a rank, and returns a
+#' dataset suitable for bias correction by invoking
+#' \code{create_target_group_background_data} or
+#' \code{create_bias_grid}, depending on the number of species occurrence
+#' records available for the species and the spatial extent of the selection.
 #' @keywords GBIF, sampling bias, SDM
 #' @export
 bias_correction <- function(
@@ -38,7 +36,10 @@ bias_correction <- function(
   lonMin = NULL,
   lonMax = NULL,
   latMin = NULL,
-  latMax = NULL){
+  latMax = NULL,
+  breaks = NULL,
+  nbreaks = NULL,
+  limit = 200000){
 
   # check valid variable values for the function
   if(length(target_rank) > 1){
@@ -107,37 +108,39 @@ bias_correction <- function(
     taxonKey = Key,
     georeferenced = TRUE)
 
-
   ifelse(Count > 200000, useMap <- TRUE, useMap <- FALSE)
-
 
   if(useMap == FALSE){
     # Use target group background ==============================================
-    this <- create_target_group_background_data(
-      species_name = species_name,
-      target_rank = target_rank,
-      lonMin = NULL,
-      lonMax = NULL,
-      latMin = NULL,
-      latMax = NULL,
-      limit = 200000)
+    message('Less than 200,000 records, using primary species occurrence data...\nIf you prefer to get a bias grid from the GBIF map API, use the function create_bias_grid.\n')
+    out <- occ_search(
+      taxonKey = Key,
+      return = 'data',
+      limit = limit,
+      decimalLatitude = ifelse(
+        latFilter,
+        paste(latMin,latMax,sep=','),
+        paste('-90','90',sep=',')),
+      decimalLongitude = ifelse(
+        lonFilter,
+        paste(lonMin,lonMax,sep=','),
+        paste('-180','180',sep=',')),
+      yearMin = yearMin,
+      yearMax = yearMax,
+      hasCoordinate = TRUE,
+      hasGeospatialIssue = FALSE)
+
   }else if(useMap == TRUE){
     # Use map api ==============================================================
-    this <- create_bias_grid(
+    message('\nMore than 200,000 records, using map API for aggregated data...\nIf you prefer to use occurrence records, use function create_target_group_background_data.\n')
+    out <- create_bias_grid(
       taxonkey = as.numeric(Key),
       lonMin = NULL,
       lonMax = NULL,
       latMin = NULL,
-      latMax = NULL)
+      latMax = NULL,
+      nbreaks = nbreaks,
+      breaks = breaks)
   }
-#
-#   # Use accumulation curve =====================================================
-#   this <- species_accumulation_curve_estimation(
-#     species_name = species_name,
-#     target_rank = target_rank,
-#     lonMin = NULL,
-#     lonMax = NULL,
-#     latMin = NULL,
-#     latMax = NULL)
-# }
+  return(out)
 }

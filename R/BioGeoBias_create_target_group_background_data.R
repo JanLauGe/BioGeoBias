@@ -1,5 +1,5 @@
 
-#' @title Get background data using the Target Group Background Approach (TGBA)
+#' @title Create Target Group Background data
 #' @description This function takes a species name and a rank, and returns a set
 #' of background data for species distribution models of the species using the
 #' Target Group Background Approach (TGBA).

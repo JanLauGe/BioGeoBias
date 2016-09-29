@@ -36,11 +36,14 @@ create_bias_grid <- function(
   lonMin = NULL,
   lonMax = NULL,
   latMin = NULL,
-  latMax = NULL){
+  latMax = NULL,
+  breaks = NULL,
+  nbreaks = NULL){
 
   call_map_api(
     taxonkey = taxonkey,
-    nbreaks = 50)
+    breaks = breaks,
+    nbreaks = nbreaks)
   }
 
 

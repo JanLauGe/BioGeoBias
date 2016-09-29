@@ -7,7 +7,7 @@
 create_bias_grid(taxonkey = 1, target_rank = rgbif::taxrank(),
   kingdom = c(NULL, "animalia", "plantae", "archaea", "bacteria", "fungi",
   "protozoa", "viruses"), lonMin = NULL, lonMax = NULL, latMin = NULL,
-  latMax = NULL)
+  latMax = NULL, breaks = NULL, nbreaks = NULL)
 }
 \arguments{
 \item{target_rank}{(character) a taxon rank for the target group (optional).}

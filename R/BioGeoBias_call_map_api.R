@@ -159,8 +159,8 @@ call_map_api <- function(
       }
 
       # Estimate good breaks from the number of records for the taxon.
-      # Start with an exponential series of 99 break values:
-      breaks <- seq(1,nbreaks, by = 1) ^ 1.6
+      # Start with an exponential series of 50 break values:
+      breaks <- seq(1,nbreaks, by = 1) ^ 3
 
       # A useful sequence depends on taxon, number of records, and extent.
       # For taxonkey = 1 (animalia), which has a total of 400,000,000 records,
@@ -169,7 +169,7 @@ call_map_api <- function(
       noccs <- occ_count(taxonkey, georeferenced = TRUE)
       # Get an estimate of a suitable maximum
       # This number is somewhat arbitrary. What could be a good way to scale this?
-      break_max <- noccs / 100000; if(break_max < nbreaks) break_max = nbreaks
+      break_max <- noccs / 50000; if(break_max < nbreaks) break_max = nbreaks
       break_min <- 1
       # Rescale to 1 - max
       rescale_vector <- function(x, min_value, max_value) {
@@ -179,6 +179,7 @@ call_map_api <- function(
         x = breaks,
         max_value = break_max,
         min_value = break_min) %>%
+        round(digits = 0) %>%
         as.integer() %>%
         unique
       nbreaks <- length(breaks)
@@ -229,19 +230,34 @@ call_map_api <- function(
                  'DE','DF','E0','E1','E2','E3','E4','E5','E6','E7','E8','E9','EA',
                  'EB','EC','ED','EE','EF','F0','F1','F2','F3','F4','F5','F6','F7',
                  'F8','F9','FA','FB','FC','FD','FE','FF')
-    for(i in 1:nbreaks) {
+    # Null colour
+    url_colours <- paste0(url_colours, '0%2C0%2C%23000000FF%7C')
+    # First colour
+    colour <- colours[1]
+    url_colours <-
+      paste0(
+      url_colours,
+      '0%2C',
+      breaks[1], '%2C%23',
+      colour,colour,colour,'FF%7C')
+    # All other colours
+    for(i in 2:nbreaks) {
+      # Make a ruleset for each value
       colour <- colours[i]
-      url_colours <- paste0(
-        url_colours,'%2C',
-        breaks[i],'%2C%23',
+      url_colours <-
+        paste0(
+        url_colours,
+        breaks[i-1], '%2C',
+        breaks[i], '%2C%23',
         colour,colour,colour,'FF%7C')
     }
-    # last break: use break value for floor instead of for ceiling
+    # Last colour: use break value for floor instead of for ceiling
     colour <- colours[i+1]
     url_colours <- paste0(
       url_colours,
       breaks[nbreaks],'%2C%2C%23',
       colour,colour,colour,'FF')
+    url_colours <- URLencode(url_colours)
 
     # Get a table of raster values and number of record values they correspond to
     breakstab <- cbind(

@@ -7,7 +7,7 @@
 bias_correction(species_name, target_rank = rgbif::taxrank(),
   kingdom = c(NULL, "animalia", "plantae", "archaea", "bacteria", "fungi",
   "protozoa", "viruses"), lonMin = NULL, lonMax = NULL, latMin = NULL,
-  latMax = NULL)
+  latMax = NULL, breaks = NULL, nbreaks = NULL)
 }
 \arguments{
 \item{species_name}{(character) a valid taxon name, presumably a species name.}
