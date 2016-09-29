@@ -1,0 +1,20 @@
+Package: BioGeoBias
+Version: 0.0.0.9000
+Date: 2016-09-30
+Title: BioGeoBias package
+Type: Package
+Authors@R: person(
+  "Jan Laurens",
+  "Geffert",
+  role = c("aut", "cre"),
+  email = "laurensgeffert@gmail.com")
+Author: Jan Laurens Geffert [aut, cre],
+Maintainer: Jan Laurens Geffert <laurensgeffert@gmail.com>
+Depends: R (>= 3.3.0)
+Description: Quantify and correct for bias in species occurrence data from GBIF.
+License: MIT
+URL: www.somethinghere.net
+Encoding: UTF-8
+LazyData: true
+LazyData: TRUE
+RoxygenNote: 5.0.1
