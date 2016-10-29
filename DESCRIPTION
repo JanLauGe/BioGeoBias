@@ -1,10 +1,10 @@
 Package: BioGeoBias
-Version: 0.0.0.9000
+Version: 0.1
 Date: 2016-09-30
 Title: BioGeoBias package
 Type: Package
 Authors@R: person(
-  "Jan Laurens",
+  "Laurens",
   "Geffert",
   role = c("aut", "cre"),
   email = "laurensgeffert@gmail.com")
@@ -18,3 +18,10 @@ Encoding: UTF-8
 LazyData: true
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports:
+    dplyr,
+    rgbif,
+    stats,
+    magrittr,
+    utils,
+    raster

@@ -17,9 +17,6 @@
 #' @param latMax maximum latitude of a rectancular bounding box restricting the
 #' search for species occurrences of the target group (optional).
 #' @author Jan Laurens Geffert, \email{laurensgeffert@@gmail.com}
-#' @details hello
-#' @references \url{http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors}
-#' @seealso \url{http://www.ecography.org/accepted-article/performance-tradeoffs-target-group-bias-correction-species-distribution-models}
 #' @keywords GBIF, sampling bias, web map tile, raster, grid
 #' @export
 create_bias_grid <- function(
